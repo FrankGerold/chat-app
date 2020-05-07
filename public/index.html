@@ -3,11 +3,41 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+
+    <script src="/socket.io/socket.io.js" defer></script>
+    <script src="/js/chat.js" charset="utf-8" defer></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.6.0/qs.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js" defer></script>
+
   </head>
   <body>
     <h1>CHAT APP</h1>
+
+    <div class="chatArea">
+      <form class="messageForm">
+        <input type="text" name="message" placeholder="Chat here!">
+        <input type="submit" name="submit" value="Send MEssage"></input>
+
+      </form>
+    </div>
     <button type="button" name="button" id="increment">+1</button>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/js/chat.js" charset="utf-8"></script>
+
+    <button type="button" name="location" id="location-button">Send Location</button>
+
+    <script id="msg-template" type="text/html">
+        <div>
+            <p>{{ createdAt }} - {{ message }}</p>
+        </div>
+    </script>
+
+    <script id="location-msg" type="text/html">
+        <div>
+            <p><a href="{{ url }}" target="_blank">Location</a></p>
+        </div>
+    </script>
+
+
   </body>
 </html>
