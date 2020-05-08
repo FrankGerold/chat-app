@@ -38,9 +38,10 @@ io.on('connection', (socket) => {
   })
 
   socket.on('location', (loc, acknowledge) => {
-    console.log(loc);
 
-    io.emit('locMessage', `https://www.google.com/maps?q=${loc.lat},${loc.long}`)
+    let googleString = `https://www.google.com/maps?q=${loc.lat},${loc.long}`
+
+    io.emit('locMessage', generateMsg(googleString))
     acknowledge()
   })
 

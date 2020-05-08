@@ -74,7 +74,8 @@ socket.on('countUpdated', (count) => {
 
 socket.on('message', message => {
   let newChatMessage = Mustache.render($msgTemplate, {
-    message: message.msg
+    message: message.msg,
+    createdAt: moment(message.createdAt).format('h:mm a')
   })
 
   $chatBox.insertAdjacentHTML('afterbegin', newChatMessage)
@@ -82,7 +83,8 @@ socket.on('message', message => {
 
 socket.on('locMessage', message => {
   let newLocation = Mustache.render($locTemplate, {
-    url: message
+    url: message.msg,
+    createdAt: moment(message.createdAt).format('h:mm a')
   })
 
   $chatBox.insertAdjacentHTML('afterbegin', newLocation)
