@@ -74,7 +74,7 @@ socket.on('countUpdated', (count) => {
 
 socket.on('message', message => {
   let newChatMessage = Mustache.render($msgTemplate, {
-    message
+    message: message.msg
   })
 
   $chatBox.insertAdjacentHTML('afterbegin', newChatMessage)

@@ -32,7 +32,8 @@ io.on('connection', (socket) => {
       return acknowledge('No cursing!')
     }
 
-    io.emit('chat', message)
+    io.emit('message', generateMsg(message))
+
     acknowledge()
   })
 
