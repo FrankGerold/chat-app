@@ -11,12 +11,23 @@ const $chatField = $chatForm.querySelector('input[type="text"]')
 
 const $msgTemplate = document.querySelector('#msg-template').innerHTML
 const $locTemplate = document.querySelector('#location-msg').innerHTML
+const $sidebarTemplate = document.querySelector('#sidebar-template').innerHTML
 
 let $chatBox = document.createElement('div')
 let $chatMain = document.querySelector('.chat__main')
 $chatBox.className="chat__messages"
 $chatMain.prepend($chatBox)
 
+// Options
+const { username, room } = Qs.parse(location.search, {
+  ignoreQueryPrefix: true
+})
+
+
+const autoScroll = () => {
+  // New Message element
+  let $newMessage = $chatBox.firstElementChild
+}
 
 // Listeners
 $incButton.addEventListener('click', () => {
@@ -72,10 +83,10 @@ socket.on('countUpdated', (count) => {
   $incButton.innerText=`+${count}`;
 })
 
-
 socket.on('message', message => {
   let newChatMessage = Mustache.render($msgTemplate, {
     message: message.msg,
+    user: message.user,
     createdAt: moment(message.createdAt).format('h:mm a')
   })
 
@@ -85,8 +96,31 @@ socket.on('message', message => {
 socket.on('locMessage', message => {
   let newLocation = Mustache.render($locTemplate, {
     url: message.msg,
+    user: message.user,
     createdAt: moment(message.createdAt).format('h:mm a')
   })
 
   $chatBox.insertAdjacentHTML('afterbegin', newLocation)
+})
+
+socket.on('roomData', ({ room, users }) => {
+  let userList = Mustache.render($sidebarTemplate, {
+    room,
+    users
+  })
+
+  document.querySelector('.chat__sidebar').innerHTML = userList
+
+
+})
+
+socket.emit('join', {
+  username,
+  room
+}, err => {
+  if (err) {
+    alert(err)
+
+    location.href = '/'
+  }
 })
