@@ -26,7 +26,26 @@ const { username, room } = Qs.parse(location.search, {
 
 const autoScroll = () => {
   // New Message element
-  let $newMessage = $chatBox.firstElementChild
+  let $newMessage = $chatBox.lastElementChild
+
+  // Height of new message
+  let newMessageStyles = getComputedStyle($newMessage)
+  let newMessageMargin = parseInt(newMessageStyles.marginBottom)
+  let newMessageHeight = $newMessage.offsetHeight + newMessageMargin
+
+  // view area
+  let visibleHeight = $chatBox.offsetHeight
+
+  // Height of msg container
+  let containerHeight = $chatBox.scrollHeight
+
+  // How far scrolled
+  let scrollOffset = $chatBox.scrollTop + visibleHeight
+
+  if (containerHeight - newMessageHeight <= scrollOffset) {
+    $chatBox.scrollTop = containerHeight
+  }
+
 }
 
 // Listeners
@@ -90,7 +109,8 @@ socket.on('message', message => {
     createdAt: moment(message.createdAt).format('h:mm a')
   })
 
-  $chatBox.insertAdjacentHTML('afterbegin', newChatMessage)
+  $chatBox.insertAdjacentHTML('beforeend', newChatMessage)
+  autoScroll()
 })
 
 socket.on('locMessage', message => {
@@ -100,7 +120,8 @@ socket.on('locMessage', message => {
     createdAt: moment(message.createdAt).format('h:mm a')
   })
 
-  $chatBox.insertAdjacentHTML('afterbegin', newLocation)
+  $chatBox.insertAdjacentHTML('beforeend', newLocation)
+  autoScroll()
 })
 
 socket.on('roomData', ({ room, users }) => {
