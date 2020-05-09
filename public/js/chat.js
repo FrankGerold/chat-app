@@ -3,7 +3,6 @@ const socket = io()
 
 // DOM Elements
 const $body = document.querySelector('body')
-const $chatBox = document.createElement('div')
 const $chatForm = document.querySelector('.messageForm')
 const $incButton = document.querySelector('#increment')
 const $locationButton = document.querySelector('#location-button')
@@ -13,8 +12,10 @@ const $chatField = $chatForm.querySelector('input[type="text"]')
 const $msgTemplate = document.querySelector('#msg-template').innerHTML
 const $locTemplate = document.querySelector('#location-msg').innerHTML
 
-
-$body.append($chatBox)
+let $chatBox = document.createElement('div')
+let $chatMain = document.querySelector('.chat__main')
+$chatBox.className="chat__messages"
+$chatMain.prepend($chatBox)
 
 
 // Listeners

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Node Socket Chat</title>
+
+    <link rel="icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/styles.css">
+
+
+    <script src="/socket.io/socket.io.js" defer></script>
+    <script src="/js/chat.js" charset="utf-8" defer></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.6.0/qs.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js" defer></script>
+
+  </head>
+
+  <body>
+    <header>
+      <h1>CHAT APP</h1>
+    </header>
+
+    <div class="chat">
+
+      <div class="chat__sidebar">
+      </div>
+
+      <div class="chatArea chat__main">
+
+        <form class="messageForm message-form">
+          <input type="text" name="message" placeholder="Chat here!">
+          <input type="submit" name="submit" value="Send MEssage"></input>
+        </form>
+
+        <button type="button" name="button" id="increment">+1</button>
+
+        <button type="button" name="location" id="location-button">Send Location</button>
+
+      </div>
+
+
+
+
+    </div>
+
+
+    <script id="msg-template" type="text/html">
+      <div class="message">
+          <p>
+            <span class="message__meta">{{ createdAt }}: </span>
+            <span class="message__name">User</span>
+          </p>
+
+          <p>{{ message }}</p>
+
+      </div>
+    </script>
+
+    <script id="location-msg" type="text/html">
+        <div class="message">
+            <p>
+              <span class="message__meta">{{ createdAt }}: </span>
+              <span class="message__name">User</span>
+            </p>
+            <p><a href="{{ url }}" target="_blank">Location</a></p>
+        </div>
+    </script>
+
+  </body>
+</html>
