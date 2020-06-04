@@ -9,8 +9,13 @@
   "private": false,
   "dependencies": {
     "bad-words": "^3.0.3",
+    "bcrypt": "^4.0.1",
     "express": "^4.17.1",
-    "socket.io": "^2.3.0"
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.5.8",
+    "mongoose": "^5.9.17",
+    "socket.io": "^2.3.0",
+    "validator": "^13.0.0"
   },
   "devDependencies": {
     "env-cmd": "^10.1.0",
