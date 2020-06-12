@@ -2,6 +2,8 @@
 
 ## An ultra-lightweight extensible chat room application.
 
+### Demo:
+
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=sCc4PK7sjrU" target="_blank"><img src="http://img.youtube.com/vi/sCc4PK7sjrU/0.jpg" alt="Demo Video" width="560" height="315" border="10" /></a>
 
 # Features
